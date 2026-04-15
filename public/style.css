@@ -1,0 +1,345 @@
+/* === CSS 변수 (디자인 시스템) === */
+:root {
+    --bg-color: #0A0F1C;
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    
+    /* 상승(네온 핑크/레드류) / 하락(에메랄드/블루류) */
+    --color-up: #FF2E63;
+    --color-down: #08D9D6;
+    
+    /* 글래스모피즘용 반투명 컬러 */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    
+    /* 하이라이트/강조 */
+    --accent: #6C5CE7;
+    --neon-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+    
+    --font-en: 'Outfit', sans-serif;
+    --font-kr: 'Pretendard', sans-serif;
+}
+
+/* === 초기화 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-kr);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-family: var(--font-en); /* 기본은 영어 폰트 위주 */
+    overflow-x: hidden;
+    /* 은은한 배경 그라데이션 원 */
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(108, 92, 231, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 46, 99, 0.1), transparent 25%);
+}
+
+.dashboard-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* === 공통: 유리 블록 (Glass Panel) === */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* === 헤더 === */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.logo i {
+    color: var(--accent);
+    font-size: 2rem;
+}
+
+.logo span {
+    font-weight: 300;
+    color: var(--text-secondary);
+}
+
+#live-time {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* === 메인 그리드 레이아웃 === */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* === 섹션 헤더 === */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.badge {
+    background: rgba(108, 92, 231, 0.2);
+    color: #A29BFE;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* === 왼쪽: 주식 카드 리스트 === */
+.stocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.stock-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stock-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* 카드 상단 */
+.stock-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1rem;
+}
+
+.stock-name-box h3 {
+    font-family: var(--font-kr);
+    font-size: 1.1rem;
+    margin-bottom: 0.2rem;
+}
+
+.stock-name-box span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.stock-price-box {
+    text-align: right;
+}
+
+.stock-price {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: block;
+}
+
+.stock-rate {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.rate-up { color: var(--color-up); }
+.rate-down { color: var(--color-down); }
+
+/* 카드 본문 (DART 기본 정보 등) */
+.stock-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    font-family: var(--font-kr);
+    color: var(--text-secondary);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-row span:last-child {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* === 오른쪽: 뉴스 피드 === */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* 스크롤바 숨기기 */
+.news-list::-webkit-scrollbar {
+    width: 6px;
+}
+.news-list::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
+
+.news-card {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--accent);
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: background 0.2s;
+    display: block;
+}
+
+.news-card:hover {
+    background: rgba(108, 92, 231, 0.1);
+}
+
+.news-card h4 {
+    font-family: var(--font-kr);
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+}
+
+.news-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* === 🚨 우측 하단 고정 이슈 보드 === */
+.issue-board {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 320px;
+    z-index: 100;
+    background: rgba(10, 15, 28, 0.85); /* 덜 투명하게 */
+}
+
+/* 액션 유도를 위한 네온 보더 효과 */
+.neon-border {
+    border: 1px solid var(--color-up);
+    box-shadow: 0 0 15px rgba(255, 46, 99, 0.2), inset 0 0 10px rgba(255, 46, 99, 0.1);
+}
+
+.issue-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 0.8rem;
+}
+
+.issue-header h3 {
+    font-size: 1rem;
+    color: var(--color-up);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* 살아있다는 느낌을 주는 맥박(Pulse) 애니메이션 */
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-up);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 46, 99, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 46, 99, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 46, 99, 0); }
+}
+
+.issue-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.issue-list li label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    cursor: default;
+}
+
+.issue-list input[type="checkbox"] {
+    margin-top: 0.2rem;
+    accent-color: var(--accent);
+}
+
+.issue-list span {
+    font-size: 0.85rem;
+    font-family: var(--font-kr);
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+.issue-list span strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.issue-list .done span {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+/* 로딩 스피너 애니메이션 */
+.spin {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }

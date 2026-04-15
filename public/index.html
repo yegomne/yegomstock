@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YegomStock Dashboard</title>
+    <!-- Outfit 폰트 & 프론트엔드 아이콘 로드 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Pretendard:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- 상단 헤더 -->
+        <header class="glass-panel">
+            <div class="logo">
+                <i class="ri-stock-line"></i>
+                <h1>YegomStock <span>Terminal</span></h1>
+            </div>
+            <div class="header-info">
+                <p id="live-time">⏳ 데이터 동기화 중...</p>
+            </div>
+        </header>
+
+        <!-- 메인 콘텐츠 영역 (그리드 레이아웃) -->
+        <main class="dashboard-grid">
+            
+            <!-- 왼쪽: 종목 펀더멘탈 카드 영역 -->
+            <section class="stocks-section">
+                <div class="section-header" style="display: flex; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 0.8rem;">
+                        <h2><i class="ri-bar-chart-2-fill"></i> Daily Fundamentals</h2>
+                        <span class="badge">Track 1</span>
+                    </div>
+                    <!-- 신규 종목 추가 폼 -->
+                    <form id="add-stock-form" style="display: flex; gap: 0.5rem; align-items:flex-start;">
+                        <div style="position: relative;">
+                            <input type="text" id="new-stock-name" placeholder="🔍 종목명 검색 (예: 삼성)" required autocomplete="off" style="padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: white; width: 200px;">
+                            <div id="autocomplete-list" style="position: absolute; top: 100%; left: 0; right: 0; background: #1a1e29; border: 1px solid var(--glass-border); border-radius: 6px; z-index: 100; max-height: 250px; overflow-y: auto; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.5);"></div>
+                        </div>
+                        <input type="text" id="new-stock-code" placeholder="종목코드 확인용" readonly required style="padding: 0.4rem 0.8rem; border-radius: 6px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: #aaa; width: 130px; cursor: not-allowed;">
+                        <button type="submit" style="padding: 0.4rem 1rem; border-radius: 6px; border: none; background: var(--accent); color: white; cursor: pointer; font-weight: bold; height: 35px;"><i class="ri-add-line"></i> 추가</button>
+                    </form>
+                </div>
+                <div id="stocks-container" class="stocks-grid">
+                    <!-- JS에서 카드가 동적으로 주입됩니다 -->
+                    <div class="loading-state">
+                        <i class="ri-loader-4-line spin"></i> Firebase 데이터 로딩 중...
+                    </div>
+                </div>
+            </section>
+
+            <!-- 중앙/우측 상단: 네이버 AI 뉴스 피드 -->
+            <section class="news-section glass-panel">
+                <div class="section-header">
+                    <h2><i class="ri-newspaper-line"></i> Market Intelligence</h2>
+                </div>
+                <div id="news-container" class="news-list">
+                    <!-- 뉴스 카드 템플릿 영역 -->
+                </div>
+            </section>
+
+        </main>
+
+        <aside class="issue-board glass-panel neon-border">
+            <div class="issue-header">
+                <h3><i class="ri-checkbox-circle-fill"></i> System Status</h3>
+            </div>
+            <ul class="issue-list">
+                <li class="done">
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        <span><del><strong>Firebase 연동 및 인증키 처리 완료</strong></del><br>Web DB 및 프로젝트 연결 완벽 세팅!</span>
+                    </label>
+                </li>
+                <li class="done">
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        <span><del><strong>데이터 크롤링 통신 방어막 (403 에러)</strong></del><br>pykrx 동시 접속 차단 방지 및 순차적 지연(Sleep) 처리 시스템 완료</span>
+                    </label>
+                </li>
+                <li class="done">
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        <span><del><strong>KRX/DART 정보 포맷 매핑 최신화</strong></del><br>단순 등락률에서 PER/PBR, 시가총액, 업종 등으로 프론트/백엔드 규격 일치화</span>
+                    </label>
+                </li>
+                <li class="done">
+                    <label>
+                        <input type="checkbox" checked disabled>
+                        <span><del><strong>개별 종목별 Market Intelligence 클릭 연동</strong></del><br>종목 클릭 시 우측에 해당 관련 기사만 나타나도록 UX 고도화 성공</span>
+                    </label>
+                </li>
+            </ul>
+        </aside>
+    </div>
+
+    <!-- Firebase v9 Web SDK (Type: module) -->
+    <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+    "target_stocks": [
+        {"code": "005930", "name": "삼성전자"},
+        {"code": "035720", "name": "카카오"},
+        {"code": "086520", "name": "에코프로"},
+        {"code": "000660", "name": "SK하이닉스"},
+        {"code": "035420", "name": "NAVER"},
+        {"code": "005380", "name": "현대차"}
+    ],
+    "endpoints": {
+        "dart": "https://opendart.fss.or.kr/api/company.json",
+        "krx": "http://data-dbg.krx.co.kr/svc/apis/sto/stock_info",
+        "naver_news": "https://openapi.naver.com/v1/search/news.json",
+        "pubdata": "https://apis.data.go.kr/1160100/service/GetFinaStatInfoService_V2/getSummFinaStat_V2"
+    }
+}
